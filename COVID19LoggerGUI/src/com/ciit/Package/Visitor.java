@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Visitor {
 	
@@ -15,7 +16,8 @@ public class Visitor {
 	private String lastName;
 	private String phoneNumber;
 	private LocalDate birthDate;
-	private LocalDateTime visitDateTime;
+	private LocalDateTime visitDate;
+	private LocalDateTime visitTime;
 	
 	
 	public Visitor(
@@ -30,7 +32,9 @@ public class Visitor {
 		setLastName(newLastName);
 		setPhoneNumber(newPhoneNumber);
 		setBirthDate(newBirthDate);
-		setVisitDateTime(LocalDateTime.now());
+		
+		setvisitDate(LocalDateTime.now());
+		setvisitTime(LocalDateTime.now());
 	}
 	
 	
@@ -74,16 +78,23 @@ public class Visitor {
 		this.birthDate = birthDate;
 	}
 	
-	//	Getters and Setters VisitDateTime
-	public LocalDateTime getVisitDateTime() {
-		return visitDateTime;
+	//	Getters and Setters visitDate
+	public LocalDateTime getvisitDate() {
+		return visitDate;
 	}
-	private void setVisitDateTime(LocalDateTime visitDateTime) {
-		this.visitDateTime = visitDateTime;
+	public String getvisitTime() {
+		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");
+		return visitTime.format(myFormatObj);
+	}
+	private void setvisitDate(LocalDateTime visitDate) {
+		this.visitDate = visitDate;
+	}
+	private void setvisitTime(LocalDateTime visitTime) {
+		this.visitTime = visitTime;
 	}
 	
 	
-	
+	//TODO: Make a SEARCHING FUNCTION
 	// Searching for either First Name or Last Name
 	public static String[][] Search(String newSearchKeyword, SearchType searchType) {
 		// Making the temporary display List
@@ -111,26 +122,27 @@ public class Visitor {
 			}
 		}
 		
-		String results[][] = new String[resultList.size()][5];
+		String results[][] = new String[resultList.size()][6];
 		for (int i = 0; i < resultList.size(); i++) {
 			results[i][0] = resultList.get(i).getLastName();
 			results[i][1] = resultList.get(i).getFirstName();
 			results[i][2] = resultList.get(i).getMiddleName();
 			results[i][3] = resultList.get(i).getBirthDate().toString();
-			results[i][4] = resultList.get(i).getVisitDateTime().toLocalDate().toString();
+			results[i][4] = resultList.get(i).getvisitDate().toLocalDate().toString();
+			results[i][5] = resultList.get(i).getvisitTime();
 		}
 		
 		return results;
 	}
 	
-	// Searching for VisitDateTime
+	//TODO: Searching for visitDate
 	public static String[][] Search(LocalDate newSearchDate, SearchType newSearchType) {
 		// Making the temporary display List
 		LinkedList<Visitor> resultList = new LinkedList<>();
 		
 		if (newSearchType == SearchType.EntryDate) { 
 			for (Visitor v : visitorList) {
-				LocalDate visitDate = v.visitDateTime.toLocalDate();
+				LocalDate visitDate = v.visitDate.toLocalDate();
 				
 				if (visitDate.equals(newSearchDate)) {
 					resultList.add(v);
@@ -150,13 +162,14 @@ public class Visitor {
 		}
 		
 		// Setting the table
-		String results[][] = new String[resultList.size()][5];
+		String results[][] = new String[resultList.size()][6];
 		for (int i = 0; i < resultList.size(); i++) {
 			results[i][0] = resultList.get(i).getLastName();
 			results[i][1] = resultList.get(i).getFirstName();
 			results[i][2] = resultList.get(i).getMiddleName();
 			results[i][3] = resultList.get(i).getBirthDate().toString();
-			results[i][4] = resultList.get(i).getVisitDateTime().toLocalDate().toString();
+			results[i][4] = resultList.get(i).getvisitDate().toLocalDate().toString();
+			results[i][5] = resultList.get(i).getvisitTime();
 		}
 		
 		return results;

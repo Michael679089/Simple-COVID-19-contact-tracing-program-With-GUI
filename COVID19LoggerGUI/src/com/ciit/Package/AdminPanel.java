@@ -45,7 +45,7 @@ public class AdminPanel {
 	
 	
 	
-	private String column[] = { "Last Name", "First name", "Middle Name", "Birth date", "date of entry" };
+	private String column[] = { "Last Name", "First name", "Middle Name", "Birth date", "date of entry", "time of entry" };
 	private String data[][] = {};
 
 	/**
@@ -76,7 +76,7 @@ public class AdminPanel {
 	 */
 	private void initialize() {
 		frmAdminPanel = new JFrame();
-		frmAdminPanel.setBounds(100, 100, 700, 500);
+		frmAdminPanel.setBounds(100, 100, 790, 500);
 		frmAdminPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAdminPanel.getContentPane().setLayout(new BorderLayout(0, 0));
 		

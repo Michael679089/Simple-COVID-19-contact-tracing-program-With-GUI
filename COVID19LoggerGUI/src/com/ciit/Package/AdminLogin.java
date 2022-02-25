@@ -117,13 +117,22 @@ public class AdminLogin {
 				// START Checks Password
 				String tempStringPassword = "";
 				for (char i : passwordfieldAdminPassword.getPassword()) { 
-					tempStringPassword += i;
+					tempStringPassword += i; // Adds per letter
 				}
 				// END Checks Password
 				
-				
-				if (txtfieldUsername.getText().contentEquals(username) == false) {
+				if (txtfieldUsername.getText().isBlank() || txtfieldUsername.getText().isEmpty()) {
+					System.out.println("Username is blank/NULL.");
+					JOptionPane.showMessageDialog(frmAdminLogin, "Either the username or the password is incorrect.");
+					return;
+				}
+				else if (txtfieldUsername.getText().contentEquals(username) == false) {
 					System.out.println("Username is incorrect.");
+					JOptionPane.showMessageDialog(frmAdminLogin, "Either the username or the password is incorrect.");
+					return;
+				}
+				else if (tempStringPassword.isBlank() || tempStringPassword.isEmpty()) {
+					System.out.println("Password is blank/NULL.");
 					JOptionPane.showMessageDialog(frmAdminLogin, "Either the username or the password is incorrect.");
 					return;
 				}
